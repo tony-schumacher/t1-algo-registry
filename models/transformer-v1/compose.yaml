@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  python-service:
+    image: meinusername/python-app:v1.0.0
+    ports:
+      - "5000:5000"
+    entrypoint: ["python", "app.py", "--param1", "wert1"]
+
+  nodejs-service:
+    image: meinusername/nodejs-app:v1.0.0
+    ports:
+      - "3000:3000"
+    entrypoint: ["node", "server.js", "--param2", "wert2"]

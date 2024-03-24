@@ -1,0 +1,2 @@
+Profit/MWh,pnl,avg_buy,avg_sell,open_volume,trades,volume,test_name,start_date,end_date,strategy
+"1,49 €","52.859,96 €","87,86 €","90,09 €",0,59486,35553,id_id_transformer_L10_B0_0313-main-contract-no-drop-id-focus-id-only_T5h,2023-09-01 00:00:00+00:00,2023-12-31 23:00:00+00:00,TestStrategy
