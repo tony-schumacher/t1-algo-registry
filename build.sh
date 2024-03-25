@@ -10,9 +10,9 @@ fi
 TAG=$2
 
 # Navigate to the models directory and build the Docker image
-cd ../t1-models && docker build -t teclead/t1-model:dev_${TAG} -f api/dockerfile.models .
+cd ../t1-models && docker build -t teclead/t1-model:${TAG} -f api/dockerfile.models .
 
 # Navigate to the m7 directory and build the Docker image
-cd ../m7 && docker build -t teclead/t1-m7:dev_${TAG} .
+cd ../m7 && docker build -t teclead/t1-m7:${TAG} .
 
 echo "Docker images built successfully."
