@@ -1,18 +1,18 @@
 version: "3.8"
 services:
   model-service:
-    image: teclead/t1-model:dev_transformer0.4.1
+    image: teclead/t1-model:dev_transformer0.4.4
 
     ports:
       - "8080:8080"
     entrypoint:
-      ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+      ["uvicorn", "api.transformer_v1:app", "--host", "0.0.0.0", "--port", "8080"]
     env_file:
       - ../../.env
 
-  # m7-service:
-  #   image: teclead/t1-m7:dev_transformer0.4.1
-  #   ports:
-  #     - "7001:7001"
-  #   env_file:
-  #     - ../../.env
+  m7-service:
+    image: teclead/t1-m7:dev_transformer0.4.4
+    ports:
+      - "7001:7001"
+    env_file:
+      - ../../.env
