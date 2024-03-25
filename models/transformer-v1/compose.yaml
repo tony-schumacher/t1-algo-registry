@@ -2,13 +2,19 @@ version: "3.8"
 services:
   model-service:
     image: teclead/t1-model:dev_transformer0.4.4
-
     ports:
       - "8080:8080"
     entrypoint:
       ["uvicorn", "api.transformer_v1:app", "--host", "0.0.0.0", "--port", "8080"]
     env_file:
       - ../../.env
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080 || exit 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+      start_period: 10s
+
 
   m7-service:
     image: teclead/t1-m7:dev_transformer0.4.4
@@ -16,3 +22,5 @@ services:
       - "7001:7001"
     env_file:
       - ../../.env
+    depends_on:
+      - model-service
