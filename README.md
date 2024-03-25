@@ -18,10 +18,12 @@ By tagging the `M7` and `T1-Models` git repository with `git tag transformerV0.4
 ### Deploying to Kubernetes
 ```sh
 # generate kubernetes ressources from docker compose
-cd models/transformer-v1
+cd models/{model-name}
 kompose convert -o ./kubernetes/
 cd kubernets
 kubectl apply -f .
+# deleting from kubernetes
+kubectl delete -f .
 ```
 
 ### Local Kubernetes Dashboard

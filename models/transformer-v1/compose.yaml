@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   model-service:
-    image: teclead/t1-model:transformer0.4.4
+    image: teclead/t1-model:transformerV0.4.5
     ports:
       - "8080:8080"
     entrypoint:
@@ -17,7 +17,7 @@ services:
 
 
   tm-service:
-    image: teclead/t1-m7:transformer0.4.4
+    image: teclead/t1-m7:transformerV0.4.5
     ports:
       - "7001:7001"
     env_file:
