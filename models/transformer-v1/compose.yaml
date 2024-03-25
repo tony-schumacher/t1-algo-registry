@@ -1,13 +1,18 @@
-version: '3.8'
+version: "3.8"
 services:
-  python-service:
-    image: meinusername/python-app:v1.0.0
-    ports:
-      - "5000:5000"
-    entrypoint: ["python", "app.py", "--param1", "wert1"]
+  model-service:
+    image: teclead/t1-model:dev_transformer0.4.1
 
-  nodejs-service:
-    image: meinusername/nodejs-app:v1.0.0
     ports:
-      - "3000:3000"
-    entrypoint: ["node", "server.js", "--param2", "wert2"]
+      - "8080:8080"
+    entrypoint:
+      ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+    env_file:
+      - ../../.env
+
+  m7-service:
+    # image: teclead/t1-m7:dev_transformer0.4.1
+    # ports:
+    #   - "7001:7001"
+    # env_file:
+    #   - ../../.env
