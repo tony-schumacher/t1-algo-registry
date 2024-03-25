@@ -23,7 +23,7 @@ services:
     env_file:
       - ../../.env
     environment:
-      - portfolioIds=["day-ahead-spread-1","intraday-spread-1"]
+      - portfolioIds=["intraday-spread-50MW", "intraday-spread-single-trade"]
 
     depends_on:
       - model-service
