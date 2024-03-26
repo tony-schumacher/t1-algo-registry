@@ -3,26 +3,35 @@ kind: Deployment
 metadata:
   annotations:
     kompose.cmd: kompose convert -o ./kubernetes/
+    kompose.image-pull-secret: tlv-docker
     kompose.version: 1.32.0 (765fde254)
   labels:
-    io.kompose.service: tm-service
-  name: tm-service
+    io.kompose.service: transformer-api
+  name: transformer-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: tm-service
+      io.kompose.service: transformer-api
   template:
     metadata:
       annotations:
         kompose.cmd: kompose convert -o ./kubernetes/
+        kompose.image-pull-secret: tlv-docker
         kompose.version: 1.32.0 (765fde254)
       labels:
         io.kompose.network/transformer-v1-default: "true"
-        io.kompose.service: tm-service
+        io.kompose.service: transformer-api
     spec:
       containers:
-        - env:
+        - command:
+            - uvicorn
+            - api.transformer_v1:app
+            - --host
+            - 0.0.0.0
+            - --port
+            - "8080"
+          env:
             - name: DEPLOYMENT
               valueFrom:
                 configMapKeyRef:
@@ -123,8 +132,6 @@ spec:
                 configMapKeyRef:
                   key: password
                   name: env
-            - name: portfolioIds
-              value: '["intraday-spread-50MW", "intraday-spread-single-trade"]'
             - name: securityToken_tso
               valueFrom:
                 configMapKeyRef:
@@ -140,28 +147,25 @@ spec:
                 configMapKeyRef:
                   key: spaces_key
                   name: env
-            - name: t1ModelDomain
-              valueFrom:
-                configMapKeyRef:
-                  key: t1ModelDomain
-                  name: env
             - name: userName
               valueFrom:
                 configMapKeyRef:
                   key: userName
                   name: env
-          image: teclead/t1-m7:transformerV0.4.5
+          image: teclead/t1-model:transformerV0.4.5
           livenessProbe:
             exec:
               command:
-                - curl -f http://localhost:7001 || exit 1
+                - curl -f http://localhost:8080 || exit 1
             failureThreshold: 5
             initialDelaySeconds: 10
-            periodSeconds: 5
+            periodSeconds: 60
             timeoutSeconds: 2
-          name: tm-service
+          name: transformer-api
           ports:
-            - containerPort: 7001
-              hostPort: 7001
+            - containerPort: 8080
+              hostPort: 8080
               protocol: TCP
+      imagePullSecrets:
+        - name: tlv-docker
       restartPolicy: Always

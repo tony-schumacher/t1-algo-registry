@@ -20,17 +20,21 @@ By tagging the `M7` and `T1-Models` git repository with `git tag transformerV0.4
 # generate kubernetes ressources from docker compose
 cd models/{model-name}
 kompose convert -o ./kubernetes/
-cd kubernets
-kubectl apply -f .
+kubectl apply -f ./kubernetes/
 # deleting from kubernetes
-kubectl delete -f .
+kubectl delete -f ./kubernetes/
 ```
 
 ### Local Kubernetes Dashboard
 ```sh
 export POD_NAME=$(kubectl get pods -n kubernetes-dashboard -l "app.kubernetes.io/name=kubernetes-dashboard,app kubernetes.io/instance=kubernetes-dashboard" -o jsonpath="{.items[0].metadata.name}")
    kubectl -n kubernetes-dashboard port-forward $POD_NAME 8443:8443
+```
 
+### Port forwarding for local frontend connection
+```ssh
+# chose the right service name
+kubectl port-forward svc/trading-manager 7001:7001
 ```
 
 ![Architecture](docs/architecture.png)

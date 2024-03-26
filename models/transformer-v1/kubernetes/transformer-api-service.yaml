@@ -3,14 +3,15 @@ kind: Service
 metadata:
   annotations:
     kompose.cmd: kompose convert -o ./kubernetes/
+    kompose.image-pull-secret: tlv-docker
     kompose.version: 1.32.0 (765fde254)
   labels:
-    io.kompose.service: model-service
-  name: model-service
+    io.kompose.service: transformer-api
+  name: transformer-api
 spec:
   ports:
     - name: "8080"
       port: 8080
       targetPort: 8080
   selector:
-    io.kompose.service: model-service
+    io.kompose.service: transformer-api

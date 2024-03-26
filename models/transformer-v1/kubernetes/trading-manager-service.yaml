@@ -3,14 +3,15 @@ kind: Service
 metadata:
   annotations:
     kompose.cmd: kompose convert -o ./kubernetes/
+    kompose.image-pull-secret: tlv-docker
     kompose.version: 1.32.0 (765fde254)
   labels:
-    io.kompose.service: tm-service
-  name: tm-service
+    io.kompose.service: trading-manager
+  name: trading-manager
 spec:
   ports:
     - name: "7001"
       port: 7001
       targetPort: 7001
   selector:
-    io.kompose.service: tm-service
+    io.kompose.service: trading-manager
