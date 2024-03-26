@@ -1,7 +1,7 @@
 version: "3.8"
 services:
-  transformer-api:
-    image: teclead/t1-model:transformerV0.4.5
+  transformer-v1-api:
+    image: teclead/t1-model:transformerV0.4.6
     ports:
       - "8080:8080"
     entrypoint:
@@ -18,8 +18,8 @@ services:
       start_period: 10s
 
 
-  trading-manager:
-    image: teclead/t1-m7:transformerV0.4.6
+  transformer-v1-tm:
+    image: teclead/t1-m7:transformerV0.4.7
     ports:
       - "7001:7001"
     env_file:
@@ -27,11 +27,11 @@ services:
     labels:
       kompose.image-pull-secret	: "tlv-docker"
     environment:
-      - portfolioIds=["intraday-spread-50MW", "intraday-spread-single-trade"]
-      - t1ModelDomain=http://transformer-api:8080
+      - portfolioIds=["intraday-spread-slow","intraday-spread-100MW","intraday-spread-fast-small","intraday-spread-50MW","intraday-spread-single-trade"]
+      - t1ModelDomain=http://transformer-v1-api:8080
 
     depends_on:
-      - transformer-api
+      - transformer-v1-api
     
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:7001 || exit 1"]

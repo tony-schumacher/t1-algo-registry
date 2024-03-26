@@ -34,7 +34,12 @@ export POD_NAME=$(kubectl get pods -n kubernetes-dashboard -l "app.kubernetes.io
 ### Port forwarding for local frontend connection
 ```ssh
 # chose the right service name
-kubectl port-forward svc/trading-manager 7001:7001
+kubectl port-forward svc/transformer-v1-tm 7001:7001
 ```
+
+### Kubernetes Dashboard
+To access Dashboard run:
+  `kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443`
+Dashboard will be available at: https://localhost:8443
 
 ![Architecture](docs/architecture.png)
