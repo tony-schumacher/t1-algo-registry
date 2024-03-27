@@ -25,12 +25,6 @@ kubectl apply -f ./kubernetes/
 kubectl delete -f ./kubernetes/
 ```
 
-### Local Kubernetes Dashboard
-```sh
-export POD_NAME=$(kubectl get pods -n kubernetes-dashboard -l "app.kubernetes.io/name=kubernetes-dashboard,app.kubernetes.io/instance=kubernetes-dashboard" -o jsonpath="{.items[0].metadata.name}")
-   kubectl -n kubernetes-dashboard port-forward $POD_NAME 8443:8443
-```
-
 ### Port forwarding for local frontend connection
 ```ssh
 # chose the right service name
