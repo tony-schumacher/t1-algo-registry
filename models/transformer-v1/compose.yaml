@@ -19,7 +19,7 @@ services:
 
 
   transformer-v1-tm:
-    image: teclead/t1-m7:transformerV0.4.7
+    image: teclead/t1-m7:transformerV0.4.8
     ports:
       - "7001:7001"
     env_file:

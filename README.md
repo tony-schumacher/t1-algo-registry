@@ -32,6 +32,7 @@ kubectl port-forward svc/transformer-v1-tm 7001:7001
 ```
 
 ### Kubernetes Dashboard
+Create a token to login: `kubectl -n kube-system create token admin-user`
 To access Dashboard run:
   `kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443`
 Dashboard will be available at: https://localhost:8443

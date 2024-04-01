@@ -149,7 +149,7 @@ spec:
                 configMapKeyRef:
                   key: userName
                   name: env
-          image: teclead/t1-m7:transformerV0.4.7
+          image: teclead/t1-m7:transformerV0.4.8
           livenessProbe:
             exec:
               command:
