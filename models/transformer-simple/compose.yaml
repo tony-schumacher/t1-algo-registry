@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  transformer-v1-api:
+    image: teclead/t1-model:transformer-simple-V0.2
+    ports:
+      - "8080:8080"
+    entrypoint:
+      ["uvicorn", "api.transformer_v1:app", "--host", "0.0.0.0", "--port", "8080"]
+    env_file:
+      - ../../.env
+    labels:
+      kompose.image-pull-secret	: "tlv-docker"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080 || exit 1"]
+      interval: 60s
+      timeout: 2s
+      retries: 5
+      start_period: 10s
+
+
+  transformer-v1-tm:
+    image: teclead/t1-m7:transformer-simple-V0.2
+    ports:
+      - "7001:7001"
+    env_file:
+      - ../../.env
+    labels:
+      kompose.image-pull-secret	: "tlv-docker"
+    environment:
+      - portfolioIds=["intraday-tf-simple"]
+      - t1ModelDomain=http://transformer-v1-api:8080
+
+    depends_on:
+      - transformer-v1-api
+    
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:7001 || exit 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+      start_period: 10s
+

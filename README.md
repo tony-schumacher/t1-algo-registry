@@ -26,7 +26,7 @@ kubectl delete -f ./kubernetes/
 ```
 
 ### Port forwarding for local frontend connection
-```ssh
+```sh
 # chose the right service name
 kubectl port-forward svc/transformer-v1-tm 7001:7001
 ```

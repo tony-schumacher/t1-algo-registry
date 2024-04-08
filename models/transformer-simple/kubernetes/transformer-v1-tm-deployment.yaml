@@ -20,7 +20,7 @@ spec:
         kompose.image-pull-secret: tlv-docker
         kompose.version: 1.32.0 (765fde254)
       labels:
-        io.kompose.network/transformer-v1-default: "true"
+        io.kompose.network/transformer-simple-default: "true"
         io.kompose.service: transformer-v1-tm
     spec:
       containers:
@@ -126,7 +126,7 @@ spec:
                   key: password
                   name: env
             - name: portfolioIds
-              value: '["intraday-spread-slow","intraday-spread-100MW","intraday-spread-fast-small","intraday-spread-50MW","intraday-spread-single-trade"]'
+              value: '["intraday-tf-simple"]'
             - name: securityToken_tso
               valueFrom:
                 configMapKeyRef:
@@ -149,7 +149,7 @@ spec:
                 configMapKeyRef:
                   key: userName
                   name: env
-          image: teclead/t1-m7:transformerV0.4.8
+          image: teclead/t1-m7:transformer-simple-V0.2
           livenessProbe:
             exec:
               command:
