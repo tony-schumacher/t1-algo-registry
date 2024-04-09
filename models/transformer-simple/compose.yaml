@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   transformer-v1-api:
-    image: teclead/t1-model:transformer-simple-V0.2
+    image: teclead/t1-model:transformer-simple-V0.3
     ports:
       - "8080:8080"
     entrypoint:
